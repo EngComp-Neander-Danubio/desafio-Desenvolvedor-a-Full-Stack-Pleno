@@ -1,5 +1,4 @@
 import type { ReactElement } from "react";
-import { AiOutlineArrowDown } from "react-icons/ai";
 
 export interface ColumnProps<T> {
   key: string;
@@ -16,11 +15,10 @@ const TableMain = <T,>({ data, columns }: Props<T>) => {
   const headers = columns.map((column, index) => (
     <th
       key={`headCell-${index}`}
-      className="px-4 py-3 text-center border-b border-gray-200 bg-gray-50 text-sm font-medium text-gray-700"
+      className="px-4 py-3 text-center border border-[#002D44] text-sm font-medium text-white bg-[#001622]"
     >
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex items-center justify-center gap-2 text-white">
         {column.title}
-        {column.title !== "Ações" && <AiOutlineArrowDown className="w-4 h-4" />}
       </div>
     </th>
   ));
@@ -28,7 +26,7 @@ const TableMain = <T,>({ data, columns }: Props<T>) => {
   const rows = !data?.length ? (
     <tr>
       <td
-        className="text-center py-4 text-sm text-gray-500"
+        className="text-center py-4 text-sm text-white"
         colSpan={columns.length}
       >
         Nenhum dado
@@ -36,7 +34,7 @@ const TableMain = <T,>({ data, columns }: Props<T>) => {
     </tr>
   ) : (
     data.map((row, index) => (
-      <tr key={`row-${index}`} className="hover:bg-gray-50 transition">
+      <tr key={`row-${index}`} className="hover:bg-[#002D44] transition">
         {columns.map((column, index2) => {
           const value = column.render
             ? column.render(column, row as T)
@@ -45,7 +43,7 @@ const TableMain = <T,>({ data, columns }: Props<T>) => {
           return (
             <td
               key={`cell-${index2}`}
-              className="px-4 py-2 text-sm text-gray-600 text-center"
+              className="px-4 py-2 text-sm text-white text-center border border-[#002D44]"
             >
               {value}
             </td>
@@ -56,15 +54,17 @@ const TableMain = <T,>({ data, columns }: Props<T>) => {
   );
 
   return (
-    <div className="w-full mb-10 overflow-x-auto border border-gray-300 rounded-lg">
-      <table className="min-w-full text-sm">
-        <thead>
+    <div className="w-full min-h-[500px] p-20 m-10 overflow-x-auto border rounded-[16px] border-[#002D44] rounded-lg bg-[#001622]">
+      <table className="min-w-full text-sm text-white">
+        <thead className="text-white">
           <tr>{headers}</tr>
         </thead>
-        <tbody>{rows}</tbody>
+        <tbody className="text-white">{rows}</tbody>
       </table>
     </div>
   );
 };
+
+
 
 export default TableMain;
