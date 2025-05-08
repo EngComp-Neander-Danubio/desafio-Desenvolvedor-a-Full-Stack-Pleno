@@ -7,5 +7,17 @@ export default defineConfig({
     plugins: [react(), tailwindcss()],
     define: {
         "process.env": process.env
+    },
+    test: {
+        globals: true,
+        environment: "jsdom",
+        setupFiles: "./vitest-setup.js",
+        include: [
+            "./src/tests/unit/**/*.spec.tsx",
+            "./src/tests/integration/**/*.spec.tsx"
+        ],
+        sequence: {
+            concurrent: false
+        }
     }
 });

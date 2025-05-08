@@ -50,7 +50,7 @@ export const columns: Array<ColumnProps<DataCars>> = [
         render: (_, record) => {
             return (
             <>
-            {record.type === 'vehicle' ? 'Veículo' : 'null'}
+            {record.type === 'vehicle' ? 'Veículo' : record.type}
             </>           
         )},
     },

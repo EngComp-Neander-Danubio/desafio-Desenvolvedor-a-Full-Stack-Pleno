@@ -15,36 +15,31 @@ export const NavbarMain: React.FC<Iprops> = ({
 }) => {
     const options = ["Rastreados", "Outros"];
     return (
-        <>
-            <nav className="bg-primary text-white py-4 border-blue-30 justify-center items-center">
-                <div className="w-full max-w-[1700px] mx-auto flex justify-between items-center px-4">
-                    <div className="flex flex-row items-center gap-[100px]">
-                        <h1 className="text-xl font-bold">{name}</h1>
-                        <div className="flex items-center gap-[20px]">
-                            {options.map((option, index) => (
-                                <RadioButton
-                                    key={index}
-                                    index={index}
-                                    isChecked={selectedIndex === index}
-                                    handleRadioChange={handleRadioChange}
-                                    option={option}
-                                    
-                                />
-                            ))}
-                        </div>
-                    </div>
-                    <div className="flex flex-row gap-[20px] items-center ml-auto justify-center">
-                        <InputSearch
-                            label={""}
-                            placeholder={"Buscar por placa ou frota"}
-                            onChange={e => {
-                                setFilterWord(e.target.value);
-                            }}
-                        />
-                        <ButtonMain label={"Novo"} variant="primary" />
+        <nav id="nav-navbar" className="bg-primary text-white py-4 border-blue-30">
+            <div className="w-full max-w-[1700px] mx-auto px-4 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 lg:gap-[100px] w-full lg:w-auto">
+                    <h1 className="text-xl font-bold">{name}</h1>
+                    <div className="flex flex-wrap gap-4">
+                        {options.map((option, index) => (
+                            <RadioButton
+                                key={index}
+                                index={index}
+                                isChecked={selectedIndex === index}
+                                handleRadioChange={handleRadioChange}
+                                option={option}
+                            />
+                        ))}
                     </div>
                 </div>
-            </nav>
-        </>
+                <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center w-full lg:w-auto sm:justify-between">
+                    <InputSearch
+                        label=""
+                        placeholder="Buscar por placa ou frota"
+                        onChange={e => setFilterWord(e.target.value)}
+                    />
+                    <ButtonMain label="Novo" variant="primary" />
+                </div>
+            </div>
+        </nav>
     );
 };

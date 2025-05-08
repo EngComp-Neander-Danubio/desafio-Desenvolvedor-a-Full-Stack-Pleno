@@ -72,14 +72,9 @@ export const Home = () => {
         const scrollTop = window.scrollY;
         const windowHeight = window.innerHeight;
         const fullHeight = document.documentElement.scrollHeight;
-
-        // Quando o usuário estiver a 100px do final
         if (scrollTop + windowHeight >= fullHeight - 30) {
         setPage(prev => prev + 1);
         }
-        /* else{
-            setPage(prev=> prev - 1)
-        } */
     };
 
     window.addEventListener("scroll", handleScroll);

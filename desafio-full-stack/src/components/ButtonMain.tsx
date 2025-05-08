@@ -18,6 +18,7 @@ export default function ButtonMain({
 
     return (
         <button
+            id="button"
             onClick={onClick}
             className={`${styles[variant]} ${className} h-[45px] w-[149px] items-center text-center border rounded-[8px]`}
         >

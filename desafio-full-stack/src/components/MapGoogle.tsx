@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from "@react-google-maps/api";
 import type { DataCarsLocation } from "../pages/types/types";
 import { formatDateTime } from "../utils/formatDateTime";
-import { truckIcon } from "./types/types";
+import { truckIcon } from "../icons/truckIcon";
 
 interface ICarsProps {
   datasCar: DataCarsLocation[];
@@ -10,7 +10,8 @@ interface ICarsProps {
 
 const containerStyle = {
   width: "100%",
-  height: "400px"
+  height: "400px",
+  borderRadius: '16px'
 };
 
 export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
@@ -46,6 +47,7 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
       <div className="w-full max-w-[1700px] mx-auto p-10 border-2 rounded-[16px] border-[#002D44]">
         <h2 className="text-white text-xl font-bold mb-4">Mapa Rastreador</h2>
         <GoogleMap
+        id="map-google"
           mapContainerStyle={containerStyle}
           onLoad={onLoad}
         >
@@ -55,6 +57,7 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
               position={{ lat: car.lat, lng: car.lng }}
               onClick={() => setSelectedCar(car)}
               icon={truckIcon}
+             
             />
           ))}
 
@@ -62,7 +65,7 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
             <InfoWindow
               position={{ lat: selectedCar.lat, lng: selectedCar.lng }}
               onCloseClick={() => setSelectedCar(undefined)}
-              options={{ minWidth: 300}}
+              options={{ minWidth: 300 }}
             >
               <div className="flex flex-col items-center justify-center">
                 <strong>Placa:</strong> {selectedCar.plate} <br />
@@ -83,6 +86,9 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
       </div>
     </>
   ) : (
-    <p>Carregando mapa...</p>
+    <div className="flex items-center justify-center min-h-screen">
+                <div className="w-8 h-8 border-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
+            </div>
+   
   );
 };
