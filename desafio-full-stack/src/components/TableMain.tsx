@@ -63,6 +63,7 @@ const TableMain = <T,>({ data, columns }: Props<T>) => {
     </table>
   </div>
 );
+
 };
 
 

@@ -4,7 +4,7 @@ export type DataCars = {
     id: string;
     plate: string;
     fleet: string;
-    type: number;
+    type: string;
     model: string;
     status: string;
     latitude: number;
@@ -46,9 +46,21 @@ export const columns: Array<ColumnProps<DataCars>> = [
     {
         key: "type",
         title: "Tipo",
+        render: (_, record) => {
+            return (
+            <>
+            {record.type === 'vehicle' ? 'Veículo' : 'null'}
+            </>           
+        )},
     },
     {
         key: "status",
         title: "Status",
+        render: (_, record) => {
+            return (
+            <>
+            {record.status === 'active' ? 'Ativo' : 'Inativo'}
+            </>           
+        )},
     },
 ];

@@ -1,8 +1,8 @@
 interface ButtonProps {
     label: string;
     variant?: "primary" | "secondary";
-    onClick?: () => void; // Adicionado para tornar o botão mais reutilizável
-    className?: string; // Para permitir customização adicional
+    onClick?: () => void;
+    className?: string;
 }
 
 export default function ButtonMain({
