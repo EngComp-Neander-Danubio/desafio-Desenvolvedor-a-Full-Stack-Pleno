@@ -21,6 +21,7 @@ export type DataCarsLocation = {
     ignition: string;
     lat: number;
     lng: number;
+    createdAt: string;
 };
 export const columns: Array<ColumnProps<DataCars>> = [
     /* {

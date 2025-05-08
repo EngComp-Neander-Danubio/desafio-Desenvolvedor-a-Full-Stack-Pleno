@@ -21,7 +21,7 @@ export const RadioButton: React.FC<Iprops> = ({
                     value="opcao1"
                     checked={isChecked}
                     onChange={() => handleRadioChange(index)}
-                    className="form-radio text-blue-600"
+                    className="form-radio text-blue-600 w-[24px] h-[24px]"
                 />
                 <span className="ml-2 text-gray-700">{option}</span>
             </label>

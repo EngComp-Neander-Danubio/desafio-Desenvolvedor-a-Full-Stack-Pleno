@@ -1,0 +1,88 @@
+import React, { useState, useEffect, useCallback } from "react";
+import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from "@react-google-maps/api";
+import type { DataCarsLocation } from "../pages/types/types";
+import { formatDateTime } from "../utils/formatDateTime";
+import { truckIcon } from "./types/types";
+
+interface ICarsProps {
+  datasCar: DataCarsLocation[];
+}
+
+const containerStyle = {
+  width: "100%",
+  height: "400px"
+};
+
+export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
+  const [map, setMap] = useState<google.maps.Map | null>(null);
+  const [selectedCar, setSelectedCar] = useState<DataCarsLocation>();
+
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyD6TK4LQLPqhCjmy8m4ccV0zZftJ7CwuOU"
+  });
+
+  const onLoad = useCallback((mapInstance: google.maps.Map) => {
+    setMap(mapInstance);
+  }, []);
+
+  useEffect(() => {
+    if (map && datasCar.length > 0) {
+      const bounds = new google.maps.LatLngBounds();
+
+      datasCar.forEach((car) => {
+        bounds.extend({ lat: car.lat, lng: car.lng });
+      });
+
+      map.fitBounds(bounds);
+    }
+  }, [map, datasCar]);
+
+  return isLoaded ? (
+    <>
+      <div className="flex items-center justify-center h-[20px]">
+        <hr className="border-t-2 border-[#002D44] w-full max-w-[1700px]" />
+      </div>
+      <div className="w-full max-w-[1700px] mx-auto p-10 border-2 rounded-[16px] border-[#002D44]">
+        <h2 className="text-white text-xl font-bold mb-4">Mapa Rastreador</h2>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          onLoad={onLoad}
+        >
+          {datasCar.map((car) => (
+            <Marker
+              key={car.equipmentId}
+              position={{ lat: car.lat, lng: car.lng }}
+              onClick={() => setSelectedCar(car)}
+              icon={truckIcon}
+            />
+          ))}
+
+          {selectedCar && (
+            <InfoWindow
+              position={{ lat: selectedCar.lat, lng: selectedCar.lng }}
+              onCloseClick={() => setSelectedCar(undefined)}
+              options={{ minWidth: 300}}
+            >
+              <div className="flex flex-col items-center justify-center">
+                <strong>Placa:</strong> {selectedCar.plate} <br />
+                <strong>Frota:</strong> {selectedCar.fleet} <br />
+                <div className="flex gap-[20px]">
+                {<div>{formatDateTime(selectedCar.createdAt).date} </div>} 
+                {<div>{formatDateTime(selectedCar.createdAt).time} </div>} <br />
+                </div>
+                <div className="flex gap-[20px]">
+                {selectedCar.lat}
+                <div>,</div>
+                {selectedCar.lng}
+                </div>
+              </div>
+            </InfoWindow>
+          )}
+        </GoogleMap>
+      </div>
+    </>
+  ) : (
+    <p>Carregando mapa...</p>
+  );
+};

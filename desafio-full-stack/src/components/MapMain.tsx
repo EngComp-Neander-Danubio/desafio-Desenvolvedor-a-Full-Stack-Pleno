@@ -51,7 +51,11 @@ const CarMarkers = React.memo(({ datasCar }: ICarsProps) => (
 
 const center: LatLngExpression = calcMediaLatLong(datasCar);
   return (
-  <div className="w-full max-w-[1108px] mx-auto">
+    <>
+<div className="flex items-center justify-center h-[20px]">
+  <hr className="border-t-2 border-[#002D44] w-full max-w-[1700px]" />
+</div>
+  <div className="w-full max-w-[1700px] mx-auto p-10 border-2 rounded-[16px] border-[#002D44]">
     <h2 className="text-white text-xl font-bold mb-4">Mapa Rastreador</h2>
     <MapContainer
       center={center}
@@ -67,5 +71,6 @@ const center: LatLngExpression = calcMediaLatLong(datasCar);
       <CarMarkers datasCar={datasCar} />
     </MapContainer>
   </div>
+    </>
 );
 };

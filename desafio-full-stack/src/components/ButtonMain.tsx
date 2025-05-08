@@ -12,7 +12,7 @@ export default function ButtonMain({
     className = ""
 }: ButtonProps) {
     const styles = {
-        primary: "bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700",
+        primary: "bg-blue-700 text-white px-6 py-3 rounded hover:bg-blue-900",
         secondary: "bg-gray-600 text-white px-6 py-3 rounded hover:bg-gray-700"
     };
 

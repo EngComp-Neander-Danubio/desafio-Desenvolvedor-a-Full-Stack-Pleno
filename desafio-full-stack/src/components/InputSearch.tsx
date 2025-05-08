@@ -24,7 +24,7 @@ export const InputSearch: React.FC<InputProp> = ({
                 type={type}
                 placeholder={placeholder}
                 onChange={onChange}
-                className={`w-[279px] px-3 py-2 border rounded-[8px] shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 ${
+                className={`w-[279px] h-[45px] px-3 py-2 border rounded-[8px] shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 ${
                     error ? "border-red-500" : "border-gray-300"
                 }`}
                 style={{
