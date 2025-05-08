@@ -8,10 +8,28 @@ import { NavbarMain } from "../../components/NavbarMain";
 
 export const Home = () => {
     const [cars, setCars] = useState<DataCars[]>([]);
+    const [carsFiltereds, setCarsFiltereds] = useState<DataCars[]>(cars);
     const [carsLocation, setCarsLocation] = useState<DataCarsLocation[]>([]);
     const [loading, setLoading] = useState<boolean>(false)
+    const [filterWord, setFilterWord] = useState('')
     const [page, setPage] = useState<number>(1)
-    const handleFilter = () => {}
+    /* const handleFilter = (filter: string) => {
+        const filteredDatas = carsFiltereds.filter(car => car.plate.includes(filter) || car.fleet.includes(filter))
+        setCarsFiltereds(filteredDatas)
+    } */
+    useEffect(() => {
+  if (filterWord.trim() === "") {
+    setCarsFiltereds(cars);
+  } else {
+    const word = filterWord.toLowerCase();
+    const result = cars.filter((item) =>
+      item.plate.toLowerCase().includes(word) ||
+      item.fleet?.toLowerCase().includes(word)  
+    );
+    setCarsFiltereds(result);
+  }
+}, [filterWord, cars]);
+
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const handleRadioChange = (index: number) => {
         setSelectedIndex(index);
@@ -58,10 +76,10 @@ export const Home = () => {
     return (
     <div className="flex flex-col gap-1 justify-center bg-customBackground">
         <HeaderMain name="Neander Danubio" />
-        <NavbarMain name="Lista" handleRadioChange={handleRadioChange} selectedIndex={selectedIndex} />
+        <NavbarMain name="Lista" handleRadioChange={handleRadioChange} selectedIndex={selectedIndex} setFilterWord={setFilterWord} />
         <MapMain datasCar={carsLocation} />
         {loading ? (
-                <TableMain data={cars} columns={columns} />
+                <TableMain data={carsFiltereds} columns={columns} />
         ) : (
             <div className="flex items-center justify-center min-h-screen">
                 <div className="w-8 h-8 border-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>

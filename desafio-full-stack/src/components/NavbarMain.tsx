@@ -5,11 +5,13 @@ interface Iprops {
     name: string;
     selectedIndex: number | null;
     handleRadioChange: (index: number) => void;
+    setFilterWord: React.Dispatch<React.SetStateAction<string>>
 }
 export const NavbarMain: React.FC<Iprops> = ({
     name,
     selectedIndex,
-    handleRadioChange
+    handleRadioChange,
+    setFilterWord,
 }) => {
     const options = ["Rastreados", "Outros"];
     return (
@@ -32,6 +34,9 @@ export const NavbarMain: React.FC<Iprops> = ({
                         <InputSearch
                             label={""}
                             placeholder={"Buscar por placa ou frota"}
+                            onChange={(e)=>{
+                                setFilterWord(e.target.value)
+                            }}
                         />
                         <ButtonMain label={"Novo"} variant="secondary" />
                     </div>
