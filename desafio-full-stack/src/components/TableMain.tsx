@@ -54,15 +54,15 @@ const TableMain = <T,>({ data, columns }: Props<T>) => {
   );
 
   return (
-    <div className="w-full min-h-[500px] p-20 m-10 overflow-x-auto border rounded-[16px] border-[#002D44] rounded-lg bg-[#001622]">
-      <table className="min-w-full text-sm text-white">
-        <thead className="text-white">
-          <tr>{headers}</tr>
-        </thead>
-        <tbody className="text-white">{rows}</tbody>
-      </table>
-    </div>
-  );
+  <div className="w-full max-w-[1108px] mx-auto mt-20 p-10 overflow-x-auto border rounded-[16px] border-[#002D44] bg-[#001622]">
+    <table className="min-w-full text-sm text-white">
+      <thead className="text-white">
+        <tr>{headers}</tr>
+      </thead>
+      <tbody className="text-white">{rows}</tbody>
+    </table>
+  </div>
+);
 };
 
 

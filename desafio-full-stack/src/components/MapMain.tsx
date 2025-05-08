@@ -1,52 +1,71 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import type { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
-
-type Data = {
-  id: string;
-  plate: string;
-  fleet: string;
-  type: number;
-  model: string;
-  status: string;
-  latitude: number;
-  longitude: number;
-};
+import type { DataCarsLocation } from "../pages/types/types";
+import React from "react";
 
 interface ICarsProps {
-  datasCar: Data[];
+  datasCar: DataCarsLocation[];
 }
 
 export const MapMain: React.FC<ICarsProps> = ({ datasCar }) => {
-  const center: LatLngExpression = [-3.71722, -38.5433]; // Fortaleza, CE
+const calcMediaLatLong = (
+  data: DataCarsLocation[],
+  defaultCenter: [number, number] = [-23.55052, -46.63331] // São Paulo
+): [number, number] => {
+  if (!data.length) return defaultCenter;
 
-  return (
-    <div className="h-[500px] w-full">
-      <MapContainer
-        center={center}
-        zoom={13}
-        scrollWheelZoom={true}
-        className="h-full w-full rounded-lg shadow bg-customBackground border-[1px] border-customBorder rounded-[16px]"
-      >
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {/* {datasCar.map((car) => (
-          <Marker
-            key={car.id}
-            position={[car?.latitude, car?.longitude] as LatLngExpression}
-          >
-            <Popup>
-              <div>
-                <strong>Placa:</strong> {car.plate} <br />
-                <strong>Modelo:</strong> {car.model} <br />
-                <strong>Status:</strong> {car.status}
-              </div>
-            </Popup>
-          </Marker>
-        ))} */}
-      </MapContainer>
-    </div>
+  const total = data.reduce(
+    (acc, cur) => {
+      acc.lat += cur.lat;
+      acc.lng += cur.lng;
+      return acc;
+    },
+    { lat: 0, lng: 0 }
   );
+
+  const avgLat = total.lat / data.length;
+  const avgLng = total.lng / data.length;
+  //console.log(avgLat, avgLng);
+  
+  return [avgLat, avgLng];
+};
+const CarMarkers = React.memo(({ datasCar }: ICarsProps) => (
+  <>
+    {datasCar.map((car) => (
+      <Marker
+        key={car.equipmentId}
+        position={[car.lat, car.lng] as LatLngExpression}
+      >
+        <Popup>
+          <div>
+            <strong>Placa:</strong> {car.plate} <br />
+            <strong>Modelo:</strong> {car.model} <br />
+            <strong>Status:</strong> {car.ignition}
+          </div>
+        </Popup>
+      </Marker>
+    ))}
+  </>
+));
+
+const center: LatLngExpression = calcMediaLatLong(datasCar);
+  return (
+  <div className="w-full max-w-[1108px] mx-auto">
+    <h2 className="text-white text-xl font-bold mb-4">Mapa Rastreador</h2>
+    <MapContainer
+      center={center}
+      zoom={13}
+      style={{ height: "500px", width: "100%" }}
+      scrollWheelZoom={true}
+      className="h-full rounded-lg shadow bg-customBackground border-[1px] border-customBorder"
+    >
+      <TileLayer
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <CarMarkers datasCar={datasCar} />
+    </MapContainer>
+  </div>
+);
 };

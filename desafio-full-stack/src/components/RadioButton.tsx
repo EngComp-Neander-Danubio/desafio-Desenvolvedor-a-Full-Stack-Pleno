@@ -1,0 +1,30 @@
+interface Iprops {
+    index: number;
+    label?: string;
+    option: string;
+    isChecked: boolean;
+    handleRadioChange: (index: number) => void;
+}
+export const RadioButton: React.FC<Iprops> = ({
+    index,
+    label,
+    option,
+    isChecked,
+    handleRadioChange
+}) => {
+    return (
+        <div className="flex flex-col space-y-2">
+            <label className="inline-flex items-center">
+                <input
+                    type="radio"
+                    name={`${label}`}
+                    value="opcao1"
+                    checked={isChecked}
+                    onChange={() => handleRadioChange(index)}
+                    className="form-radio text-blue-600"
+                />
+                <span className="ml-2 text-gray-700">{option}</span>
+            </label>
+        </div>
+    );
+};

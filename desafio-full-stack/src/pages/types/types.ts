@@ -1,6 +1,6 @@
 import type { ColumnProps } from "../../components/TableMain";
 
-export type Data = {
+export type DataCars = {
     id: string;
     plate: string;
     fleet: string;
@@ -10,7 +10,19 @@ export type Data = {
     latitude: number;
     longitude: number;
 };
-export const columns: Array<ColumnProps<Data>> = [
+export type DataCarsLocation = {
+    id: string;
+    equipmentId: string;
+    name: string;
+    plate: string;
+    fleet: string;
+    type: number;
+    model: string;
+    ignition: string;
+    lat: number;
+    lng: number;
+};
+export const columns: Array<ColumnProps<DataCars>> = [
     /* {
       key: "id",
       title: "ID",

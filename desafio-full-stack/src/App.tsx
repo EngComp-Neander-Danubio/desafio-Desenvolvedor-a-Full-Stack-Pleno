@@ -3,7 +3,7 @@ import { Rotas } from "./routes/routes";
 function App() {
     return (
         <>
-            <Rotas/>
+            <Rotas />
         </>
     );
 }

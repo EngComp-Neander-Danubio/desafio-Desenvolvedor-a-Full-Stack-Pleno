@@ -1,9 +1,43 @@
-export const Navbar = () => {
+import { useState } from "react";
+import ButtonMain from "./ButtonMain";
+import { InputSearch } from "./InputSearch";
+import { RadioButton } from "./RadioButton";
+interface Iprops {
+    name: string;
+}
+export const NavbarMain: React.FC<Iprops> = ({ name }) => {
+    //const {control} = useFormContext()
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+    const handleRadioChange = (index: number) => {
+        setSelectedIndex(index);
+    };
+    const options = ["Rastreados", "Outros"];
     return (
-        <nav className="bg-navbar w-[full] h-[59px] flex justify-between px-[26px] py-[16px] border border-red-500 text-white">
-            <span className="font-poppins font-medium text-[18px] leading-[100%] tracking-[-0.02em] text-white">
-                Neander Danubio
-            </span>
+        <nav className="bg-primary text-black py-4 border-b border-blue-30">
+            <div className="w-full max-w-[1108px] mx-auto flex justify-between items-center px-4">
+                <h1 className="text-xl font-bold">{name}</h1>
+                <div className="flex items-center gap-[20px]">
+                    <div className="flex flex-row gap-[10px] items-center">
+                        {options.map((option, index) => (
+                            <RadioButton
+                                key={index}
+                                index={index}
+                                isChecked={selectedIndex === index}
+                                handleRadioChange={handleRadioChange}
+                                option={option}
+                            />
+                        ))}
+                    </div>
+                    <div className="flex flex-row gap-[20px] items-center">
+                        <InputSearch
+                            label={""}
+                            placeholder={"Buscar por placa ou frota"}
+                        />
+                        <ButtonMain label={"Novo"} variant="secondary" />
+                    </div>
+                </div>
+            </div>
         </nav>
     );
+
 };
