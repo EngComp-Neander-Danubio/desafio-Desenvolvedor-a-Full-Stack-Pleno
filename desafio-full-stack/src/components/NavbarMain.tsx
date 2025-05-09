@@ -1,6 +1,6 @@
-import ButtonMain from "./ButtonMain";
-import { InputSearch } from "./InputSearch";
-import { RadioButton } from "./RadioButton";
+import ButtonMain from './ButtonMain';
+import { InputSearch } from './InputSearch';
+import { RadioButton } from './RadioButton';
 interface Iprops {
     name: string;
     selectedIndex: number | null;
@@ -11,9 +11,9 @@ export const NavbarMain: React.FC<Iprops> = ({
     name,
     selectedIndex,
     handleRadioChange,
-    setFilterWord
+    setFilterWord,
 }) => {
-    const options = ["Rastreados", "Outros"];
+    const options = ['Rastreados', 'Outros'];
     return (
         <nav
             id="nav-navbar"

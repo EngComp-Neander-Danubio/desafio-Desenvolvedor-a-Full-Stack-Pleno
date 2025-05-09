@@ -2,11 +2,7 @@ interface ButtonProps {
     label: string;
     onClick?: () => void;
 }
-export default function ButtonMain({
-    label,
-    onClick,
-}: ButtonProps) {
-    
+export default function ButtonMain({ label, onClick }: ButtonProps) {
     return (
         <button
             id="button"

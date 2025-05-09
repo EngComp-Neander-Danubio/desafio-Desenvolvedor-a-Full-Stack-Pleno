@@ -1,6 +1,6 @@
-import type { InputProps } from "@headlessui/react";
-import React from "react";
-import type { FieldError } from "react-hook-form";
+import type { InputProps } from '@headlessui/react';
+import React from 'react';
+import type { FieldError } from 'react-hook-form';
 
 interface InputProp extends InputProps {
     label?: string;
@@ -10,7 +10,11 @@ interface InputProp extends InputProps {
     error?: FieldError | undefined;
 }
 export const InputSearch: React.FC<InputProp> = ({
-    error, label, type, placeholder, onChange
+    error,
+    label,
+    type,
+    placeholder,
+    onChange,
 }) => {
     return (
         <div>
@@ -26,10 +30,10 @@ export const InputSearch: React.FC<InputProp> = ({
                 placeholder={placeholder}
                 onChange={onChange}
                 className={`w-[279px] h-[45px] px-3 py-2 border rounded-[8px] shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 ${
-                    error ? "border-red-500" : "border-gray-300"
+                    error ? 'border-red-500' : 'border-gray-300'
                 }`}
                 style={{
-                    height: "2.5rem"
+                    height: '2.5rem',
                 }}
             />
             {error && error.message && (

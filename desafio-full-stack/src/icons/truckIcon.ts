@@ -1,5 +1,7 @@
 export const truckIcon = {
-  url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+    url:
+        'data:image/svg+xml;charset=UTF-8,' +
+        encodeURIComponent(`
     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="116.000000pt" height="130.000000pt" viewBox="0 0 1160 1300"
  preserveAspectRatio="xMidYMid meet">
@@ -44,6 +46,6 @@ export const truckIcon = {
 
 
   `),
-  //scaledSize: new window.google.maps.Size(64, 80),
-  //anchor: new window.google.maps.Point(32, 80) // ponta do balão
+    //scaledSize: new window.google.maps.Size(64, 80),
+    //anchor: new window.google.maps.Point(32, 80) // ponta do balão
 };

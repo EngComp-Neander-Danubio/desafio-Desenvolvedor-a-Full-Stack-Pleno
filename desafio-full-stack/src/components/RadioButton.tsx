@@ -10,7 +10,7 @@ export const RadioButton: React.FC<Iprops> = ({
     label,
     option,
     isChecked,
-    handleRadioChange
+    handleRadioChange,
 }) => {
     return (
         <div className="flex flex-col space-y-2">
