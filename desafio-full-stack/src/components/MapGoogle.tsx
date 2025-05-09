@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, forwardRef } from "react";
 import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from "@react-google-maps/api";
 import type { DataCarsLocation } from "../pages/types/types";
 import { formatDateTime } from "../utils/formatDateTime";
@@ -14,7 +14,8 @@ const containerStyle = {
   borderRadius: '16px'
 };
 
-export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
+export const MapGoogle = forwardRef<HTMLDivElement, ICarsProps>(
+    ({ datasCar }, ref) => {
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [selectedCar, setSelectedCar] = useState<DataCarsLocation>();
 
@@ -38,10 +39,10 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
       map.fitBounds(bounds);
     }
   }, [map, datasCar]);
-  if (!isLoaded || (datasCar && datasCar.length === 0)) return null;
+  if (!isLoaded) return null;
   return isLoaded ? (
     <>
-      <div className="flex items-center justify-center h-[20px]">
+      <div ref={ref} className="flex items-center justify-center h-[20px]">
         <hr className="border-t-2 border-[#002D44] w-full max-w-[1700px]" />
       </div>
       <div className="w-full max-w-[1700px] mx-auto p-10 border-2 rounded-[16px] border-[#002D44]">
@@ -53,9 +54,9 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
           mapContainerStyle={containerStyle}
           onLoad={onLoad}
         >
-          {datasCar?.map((car) => (
+          {datasCar.map((car, index) => (
             <Marker
-              key={car.equipmentId}
+              key={index}
               position={{ lat: car.lat, lng: car.lng }}
               onClick={() => setSelectedCar(car)}
               icon={truckIcon}
@@ -63,7 +64,7 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
               />
           ))}
 
-          {selectedCar && (
+          {datasCar.length > 0 && selectedCar && (
               <InfoWindow
               position={{ lat: selectedCar.lat, lng: selectedCar.lng }}
               onCloseClick={() => setSelectedCar(undefined)}
@@ -94,4 +95,4 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
             </div>
    
   );
-};
+});

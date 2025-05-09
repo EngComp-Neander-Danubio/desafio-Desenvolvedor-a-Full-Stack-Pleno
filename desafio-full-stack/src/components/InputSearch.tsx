@@ -13,7 +13,7 @@ export const InputSearch: React.FC<InputProp> = ({
     error, label, type, placeholder, onChange
 }) => {
     return (
-        <div className="mb-4">
+        <div>
             <label
                 htmlFor={label}
                 className="block text-sm font-medium text-gray-700 mb-1"

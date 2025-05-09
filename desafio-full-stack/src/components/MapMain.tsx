@@ -34,7 +34,7 @@ const CarMarkers = React.memo(({ datasCar }: ICarsProps) => (
   <>
     {datasCar.map((car) => (
       <Marker
-        key={car.equipmentId}
+        key={car.id}
         position={[car.lat, car.lng] as LatLngExpression}
       >
         <Popup>

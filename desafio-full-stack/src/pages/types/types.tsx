@@ -1,5 +1,5 @@
 import type { ColumnProps } from "../../components/TableMain";
-
+import { PiMapPinLine } from "react-icons/pi";
 export type DataCars = {
     id: string;
     plate: string;
@@ -7,8 +7,6 @@ export type DataCars = {
     type: string;
     model: string;
     status: string;
-    latitude: number;
-    longitude: number;
 };
 export type DataCarsLocation = {
     id: string;
@@ -23,6 +21,8 @@ export type DataCarsLocation = {
     lng: number;
     createdAt: string;
 };
+
+
 export const columns: Array<ColumnProps<DataCars>> = [
     /* {
       key: "id",
@@ -61,6 +61,20 @@ export const columns: Array<ColumnProps<DataCars>> = [
             return (
             <>
             {record.status === 'active' ? 'Ativo' : 'Inativo'}
+            </>           
+        )},
+    },
+    {
+        key: "action",
+        title: "Ações",
+        render: (_, record) => {
+            return (
+            <>
+            {
+                <div key={record.id} className="flex items-center justify-center hover:cursor-pointer" >
+                <PiMapPinLine size={20} onClick={()=>handleLoadingOneCar(record.id)}/>
+                </div>
+            }
             </>           
         )},
     },

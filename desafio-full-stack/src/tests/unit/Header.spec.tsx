@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { test, expect, it } from "vitest";
+import { expect, it } from "vitest";
 import { HeaderMain } from "../../components/HeaderMain";
 import "@testing-library/jest-dom/vitest";
 describe("HeaderMain", () => {

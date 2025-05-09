@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import api from "../../api/api";
-import TableMain from "../../components/TableMain";
-import { MapMain } from "../../components/MapMain";
-import { columns, type DataCars, type DataCarsLocation } from "../types/types";
+import TableMain, { type ColumnProps } from "../../components/TableMain";
+import { type DataCars, type DataCarsLocation } from "../types/types";
 import { HeaderMain } from "../../components/HeaderMain";
 import { NavbarMain } from "../../components/NavbarMain";
 import { Toaster, toast } from 'react-hot-toast';
 import { MapGoogle } from "../../components/MapGoogle";
+import { PiMapPinLine } from "react-icons/pi";
+
 
 export const Home = () => {
     const [cars, setCars] = useState<DataCars[]>([]);
@@ -16,10 +17,77 @@ export const Home = () => {
     const [loading, setLoading] = useState<boolean>(false)
     const [filterWord, setFilterWord] = useState('')
     const [page, setPage] = useState<number>(1)
-    /* const handleFilter = (filter: string) => {
-        const filteredDatas = carsFiltereds.filter(car => car.plate.includes(filter) || car.fleet.includes(filter))
-        setCarsFiltereds(filteredDatas)
-    } */
+    const mapRef = useRef<HTMLDivElement>(null);
+    const handleLoadingCarLocation = (plate: string | number) => {
+        const car = carsLocation.filter(item => item.plate === plate)
+        if(plate){
+            setCarsLocationFiltered(car)
+        }else {
+            setCarsLocationFiltered(carsLocation)
+        }
+    }
+
+    const columns: Array<ColumnProps<DataCars>> = [
+        /* {
+          key: "id",
+          title: "ID",
+        }, */
+        {
+            key: "plate",
+            title: "Placa",
+        },
+        {
+            key: "fleet",
+            title: "Frota",
+        },
+        {
+            key: "model",
+            title: "Modelo",
+        },
+        {
+            key: "nameOwner",
+            title: "Proprietário",
+        },
+        {
+            key: "type",
+            title: "Tipo",
+            render: (_, record) => {
+                return (
+                <>
+                {record.type === 'vehicle' ? 'Veículo' : record.type}
+                </>           
+            )},
+        },
+        {
+            key: "status",
+            title: "Status",
+            render: (_, record) => {
+                return (
+                <>
+                {record.status === 'active' ? 'Ativo' : 'Inativo'}
+                </>           
+            )},
+        },
+        {
+            key: "action",
+            title: "Ações",
+            render: (_, record) => {
+                return (
+                <>
+                {
+                    <div key={record.id} className="flex items-center justify-center hover:cursor-pointer" title={`visualizar ${record.plate}`}>
+                    <PiMapPinLine size={20} onClick={()=>{
+                        handleLoadingCarLocation(record.plate); 
+                        mapRef.current?.scrollIntoView({ behavior: "smooth" });
+                        }}/>
+                    </div>
+                }
+                </>           
+            )},
+        },
+    ];
+    
+
     useEffect(() => {
   if (filterWord.trim() === "") {
     setCarsFiltereds(cars);
@@ -52,7 +120,7 @@ export const Home = () => {
                 params: {
                     type: 'tracked',
                     page: page, 
-                    perPage: 5
+                    perPage: 20
                 },
             });
             toast.success('Dados carregados com Sucesso!')
@@ -93,11 +161,11 @@ export const Home = () => {
 
     return (<>
     <Toaster/>
-    <div className="flex flex-col gap-1 justify-center justify-items-center-safe bg-[#001622]">
+    <div className="flex flex-col gap-1 p-5 justify-center justify-items-center-safe bg-[#001622]">
         <HeaderMain name="Neander Danubio" />
         <NavbarMain name="Lista" handleRadioChange={handleRadioChange} selectedIndex={selectedIndex} setFilterWord={setFilterWord} />
         {/* <MapMain datasCar={carsLocation} /> */}
-         <MapGoogle datasCar={carsLocationFiltered} />
+         <MapGoogle ref={mapRef} datasCar={carsLocationFiltered} />
         {loading ? (
                 <TableMain data={carsFiltereds} columns={columns} />
         ) : (
@@ -105,7 +173,6 @@ export const Home = () => {
                 <div className="w-8 h-8 border-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
             </div>
         )}
-       
     </div>
     </>
 );

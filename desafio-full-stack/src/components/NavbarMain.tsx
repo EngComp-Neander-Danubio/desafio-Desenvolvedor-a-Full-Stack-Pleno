@@ -40,7 +40,7 @@ export const NavbarMain: React.FC<Iprops> = ({
                         placeholder="Buscar por placa ou frota"
                         onChange={e => setFilterWord(e.target.value)}
                     />
-                    <ButtonMain label="Novo" variant="primary" />
+                    <ButtonMain label="Novo" />
                 </div>
             </div>
         </nav>
