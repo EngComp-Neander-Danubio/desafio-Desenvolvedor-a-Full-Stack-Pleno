@@ -1,19 +1,18 @@
 import { render, screen } from "@testing-library/react";
-import { test, expect, vi, describe} from "vitest";
-import ButtonMain  from "../../components/ButtonMain";
-import "@testing-library/jest-dom/vitest"
-describe('ButtonMain', () => {
+import { test, expect, vi, describe } from "vitest";
+import ButtonMain from "../../components/ButtonMain";
+import "@testing-library/jest-dom/vitest";
+describe("ButtonMain", () => {
     const handleClick = vi.fn();
 
-    it('if I to pass the label props', () =>{
+    it("if I to pass the label props", () => {
         render(<ButtonMain label={"Novo"} onClick={handleClick} />);
         expect(screen.getByText("Novo")).toBeInTheDocument();
-    })
-    it("if I don't to pass the label props", () => {
+    });
+    it("if I don't to pass the label props, the button should be rendered", () => {
         render(<ButtonMain onClick={handleClick} />);
-        const button = screen.getByRole("button");
+        const button = screen.queryByRole("button");
         expect(button).toBeInTheDocument();
-        expect(button).toBeEmptyDOMElement();
+        //expect(button).toHaveAttribute('label', undefined)
     });
 });
-

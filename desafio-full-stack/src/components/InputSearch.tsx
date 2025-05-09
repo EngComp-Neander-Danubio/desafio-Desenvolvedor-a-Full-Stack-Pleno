@@ -21,7 +21,7 @@ export const InputSearch: React.FC<InputProp> = ({
                 {label}
             </label>
             <input
-            id="input"
+                id="input-search"
                 type={type}
                 placeholder={placeholder}
                 onChange={onChange}

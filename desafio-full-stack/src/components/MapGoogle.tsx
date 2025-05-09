@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, LoadScript, Marker, useJsApiLoader } from "@react-google-maps/api";
 import type { DataCarsLocation } from "../pages/types/types";
 import { formatDateTime } from "../utils/formatDateTime";
 import { truckIcon } from "../icons/truckIcon";
@@ -38,7 +38,7 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
       map.fitBounds(bounds);
     }
   }, [map, datasCar]);
-
+  if (!isLoaded || (datasCar && datasCar.length === 0)) return null;
   return isLoaded ? (
     <>
       <div className="flex items-center justify-center h-[20px]">
@@ -46,23 +46,25 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
       </div>
       <div className="w-full max-w-[1700px] mx-auto p-10 border-2 rounded-[16px] border-[#002D44]">
         <h2 className="text-white text-xl font-bold mb-4">Mapa Rastreador</h2>
+        <LoadScript googleMapsApiKey={"AIzaSyD6TK4LQLPqhCjmy8m4ccV0zZftJ7CwuOU"}>
+
         <GoogleMap
-        id="map-google"
+          data-testid="map-google"
           mapContainerStyle={containerStyle}
           onLoad={onLoad}
         >
-          {datasCar.map((car) => (
+          {datasCar?.map((car) => (
             <Marker
               key={car.equipmentId}
               position={{ lat: car.lat, lng: car.lng }}
               onClick={() => setSelectedCar(car)}
               icon={truckIcon}
-             
-            />
+              
+              />
           ))}
 
           {selectedCar && (
-            <InfoWindow
+              <InfoWindow
               position={{ lat: selectedCar.lat, lng: selectedCar.lng }}
               onCloseClick={() => setSelectedCar(undefined)}
               options={{ minWidth: 300 }}
@@ -83,6 +85,7 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
             </InfoWindow>
           )}
         </GoogleMap>
+          </LoadScript>
       </div>
     </>
   ) : (
