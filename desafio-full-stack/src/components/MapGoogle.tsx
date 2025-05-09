@@ -46,7 +46,7 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
       </div>
       <div className="w-full max-w-[1700px] mx-auto p-10 border-2 rounded-[16px] border-[#002D44]">
         <h2 className="text-white text-xl font-bold mb-4">Mapa Rastreador</h2>
-        <LoadScript googleMapsApiKey={"AIzaSyD6TK4LQLPqhCjmy8m4ccV0zZftJ7CwuOU"}>
+        {/* <LoadScript googleMapsApiKey={"AIzaSyD6TK4LQLPqhCjmy8m4ccV0zZftJ7CwuOU"}> */}
 
         <GoogleMap
           data-testid="map-google"
@@ -85,7 +85,7 @@ export const MapGoogle: React.FC<ICarsProps> = ({ datasCar }) => {
             </InfoWindow>
           )}
         </GoogleMap>
-          </LoadScript>
+         {/*  </LoadScript> */}
       </div>
     </>
   ) : (
