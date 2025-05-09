@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { GoogleMap, InfoWindow, LoadScript, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from "@react-google-maps/api";
 import type { DataCarsLocation } from "../pages/types/types";
 import { formatDateTime } from "../utils/formatDateTime";
 import { truckIcon } from "../icons/truckIcon";

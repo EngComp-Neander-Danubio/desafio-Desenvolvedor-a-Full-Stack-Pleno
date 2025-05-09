@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { test, expect, vi, describe } from "vitest";
+import { expect, vi, describe } from "vitest";
 import { MapGoogle } from "../../components/MapGoogle";
 import "@testing-library/jest-dom/vitest";
 import type { DataCarsLocation } from "../../pages/types/types";

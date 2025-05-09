@@ -15,8 +15,11 @@ export const NavbarMain: React.FC<Iprops> = ({
 }) => {
     const options = ["Rastreados", "Outros"];
     return (
-        <nav id="nav-navbar" className="bg-primary text-white py-4 border-blue-30">
-            <div className="w-full max-w-[1700px] mx-auto px-4 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0">
+        <nav
+            id="nav-navbar"
+            className="bg-primary h-[49px] text-white border-blue-30"
+        >
+            <div className="w-full max-w-[1700px] mx-auto px-4 flex flex-col lg:flex-row justify-between items-center lg:items-center gap-4 lg:gap-0">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 lg:gap-[100px] w-full lg:w-auto">
                     <h1 className="text-xl font-bold">{name}</h1>
                     <div className="flex flex-wrap gap-4">
@@ -31,7 +34,7 @@ export const NavbarMain: React.FC<Iprops> = ({
                         ))}
                     </div>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center w-full lg:w-auto sm:justify-between">
+                <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-center w-full lg:w-auto sm:justify-between">
                     <InputSearch
                         label=""
                         placeholder="Buscar por placa ou frota"

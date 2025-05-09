@@ -12,6 +12,7 @@ export const Home = () => {
     const [cars, setCars] = useState<DataCars[]>([]);
     const [carsFiltereds, setCarsFiltereds] = useState<DataCars[]>(cars);
     const [carsLocation, setCarsLocation] = useState<DataCarsLocation[]>([]);
+    const [carsLocationFiltered, setCarsLocationFiltered] = useState<DataCarsLocation[]>(carsLocation);
     const [loading, setLoading] = useState<boolean>(false)
     const [filterWord, setFilterWord] = useState('')
     const [page, setPage] = useState<number>(1)
@@ -22,13 +23,21 @@ export const Home = () => {
     useEffect(() => {
   if (filterWord.trim() === "") {
     setCarsFiltereds(cars);
+    setCarsLocationFiltered(carsLocation)
   } else {
     const word = filterWord.toLowerCase();
-    const result = cars.filter((item) =>
+    const resultcars = cars.filter((item) =>
       item.plate.toLowerCase().includes(word) ||
       item.fleet?.toLowerCase().includes(word)  
     );
-    setCarsFiltereds(result);
+    const resultsCarsLocation = carsLocation.filter(item =>
+        item.plate.toLowerCase().includes(word) ||
+      item.fleet?.toLowerCase().includes(word) 
+      );
+      //console.log(resultsCarsLocation);
+      
+    setCarsFiltereds(resultcars);
+    setCarsLocationFiltered(resultsCarsLocation)
   }
 }, [filterWord, cars]);
 
@@ -38,7 +47,6 @@ export const Home = () => {
     };
      
     const handleLoadingDatas = async () => {
-         //const token = process.env.TOKEN
          try{
             const response = await api.get(`/vehicles/list-with-paginate`,{
                 params: {
@@ -89,7 +97,7 @@ export const Home = () => {
         <HeaderMain name="Neander Danubio" />
         <NavbarMain name="Lista" handleRadioChange={handleRadioChange} selectedIndex={selectedIndex} setFilterWord={setFilterWord} />
         {/* <MapMain datasCar={carsLocation} /> */}
-         <MapGoogle datasCar={carsLocation} />
+         <MapGoogle datasCar={carsLocationFiltered} />
         {loading ? (
                 <TableMain data={carsFiltereds} columns={columns} />
         ) : (
