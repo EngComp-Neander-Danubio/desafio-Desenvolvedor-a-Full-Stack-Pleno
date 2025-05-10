@@ -67,7 +67,7 @@ export const MapGoogle = forwardRef<HTMLDivElement, ICarsProps>(
                         mapContainerStyle={containerStyle}
                         onLoad={onLoad}
                     >
-                        {datasCar.map((car, index) => (
+                        {datasCar && datasCar.map((car, index) => (
                             <Marker
                                 key={index}
                                 position={{ lat: car.lat, lng: car.lng }}
@@ -82,7 +82,7 @@ export const MapGoogle = forwardRef<HTMLDivElement, ICarsProps>(
                             />
                         ))}
 
-                        {datasCar.length > 0 && selectedCar && (
+                        {datasCar && datasCar.length > 0 && selectedCar && (
                             <InfoWindow
                                 position={{
                                     lat: selectedCar.lat,

@@ -55,10 +55,10 @@ vi.mock('@react-google-maps/api', () => ({
 }));
 
 describe('MapGoogle', async () => {
-    it('if I to pass the empty dataCars props, the map function will brake', async () => {
+    it('if I to pass the empty dataCars props, the map should be rendered', async () => {
         render(<MapGoogle datasCar={[]} />);
         const map = screen.queryByTestId('map-google');
-        expect(map).toBeNull();
+        expect(map).toBeInTheDocument();
     });
     it("if I don't to pass the dataCars props, the map should be rendered", async () => {
         render(<MapGoogle />);
