@@ -13,7 +13,7 @@ export const NavbarMain: React.FC<Iprops> = ({
     handleRadioChange,
     setFilterWord,
 }) => {
-    const options = ['Rastreados', 'Outros'];
+    const options = ['Rastreados', 'Todos'];
     return (
         <nav
             id="nav-navbar"

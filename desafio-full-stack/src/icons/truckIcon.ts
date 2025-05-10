@@ -1,4 +1,4 @@
-export const truckIcon = {
+export const getTruckIcon = (fillColor: string) => ({
     url:
         'data:image/svg+xml;charset=UTF-8,' +
         encodeURIComponent(`
@@ -16,7 +16,7 @@ export const truckIcon = {
 
  <!-- Detalhes amarelos sobre a base branca -->
  <g transform="translate(0.000000,1300.000000) scale(0.100000,-0.100000)"
-    fill="#FFD13F" stroke="none">
+    fill="${fillColor}" stroke="none">
   <path d="M4940 12200 c-2010 -290 -3590 -1690 -4180 -3690 -180 -620 -210 -1840 -50 -2510
            380 -1670 1890 -3270 3460 -3690 390 -110 470 -180 890 -920 250 -440 510 -780 570 -760
            70 20 320 380 560 800 410 690 500 790 860 880 1000 260 2320 1300 2930 2300
@@ -43,9 +43,5 @@ export const truckIcon = {
            -140 280 -240 200z"/>
  </g>
 </svg>
-
-
   `),
-    //scaledSize: new window.google.maps.Size(64, 80),
-    //anchor: new window.google.maps.Point(32, 80) // ponta do balão
-};
+});

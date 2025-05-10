@@ -7,7 +7,7 @@ import {
 } from '@react-google-maps/api';
 import type { DataCarsLocation } from '../pages/types/types';
 import { formatDateTime } from '../utils/formatDateTime';
-import { truckIcon } from '../icons/truckIcon';
+import { getTruckIcon } from '../icons/truckIcon';
 import { IconRefresh } from './IconRefresh';
 
 interface ICarsProps {
@@ -28,7 +28,7 @@ export const MapGoogle = forwardRef<HTMLDivElement, ICarsProps>(
 
         const { isLoaded } = useJsApiLoader({
             id: 'google-map-script',
-            googleMapsApiKey: 'AIzaSyD6TK4LQLPqhCjmy8m4ccV0zZftJ7CwuOU',
+            googleMapsApiKey: `${process.env.API_GOOGLE}`,
         });
 
         const onLoad = useCallback((mapInstance: google.maps.Map) => {
@@ -62,9 +62,6 @@ export const MapGoogle = forwardRef<HTMLDivElement, ICarsProps>(
                         </h2>
                         <IconRefresh handleClick={refresh} />
                     </div>
-
-                    {/* <LoadScript googleMapsApiKey={"AIzaSyD6TK4LQLPqhCjmy8m4ccV0zZftJ7CwuOU"}> */}
-
                     <GoogleMap
                         data-testid="map-google"
                         mapContainerStyle={containerStyle}
@@ -75,7 +72,13 @@ export const MapGoogle = forwardRef<HTMLDivElement, ICarsProps>(
                                 key={index}
                                 position={{ lat: car.lat, lng: car.lng }}
                                 onClick={() => setSelectedCar(car)}
-                                icon={truckIcon}
+                                icon={
+                                    car.ignition.includes('Ligado')
+                                        ? getTruckIcon('#3AAA29')
+                                        : car.ignition.includes('Desligado')
+                                          ? getTruckIcon('#F04D1A')
+                                          : getTruckIcon('#FFD13F')
+                                }
                             />
                         ))}
 
@@ -86,35 +89,36 @@ export const MapGoogle = forwardRef<HTMLDivElement, ICarsProps>(
                                     lng: selectedCar.lng,
                                 }}
                                 onCloseClick={() => setSelectedCar(undefined)}
-                                options={{ minWidth: 300 }}
+                                //options={{headerContent: null}}
                             >
-                                <div className="flex flex-col items-center justify-center">
+                                <div className="flex flex-col text-black items-center justify-center">
                                     <strong>Placa:</strong> {selectedCar.plate}{' '}
                                     <br />
                                     <strong>Frota:</strong> {selectedCar.fleet}{' '}
                                     <br />
-                                    <div className="flex gap-[20px]">
+                                    <div className="flex gap-[1px]">
                                         {
                                             <div>
                                                 {
                                                     formatDateTime(
                                                         selectedCar.createdAt,
                                                     ).date
-                                                }{' '}
+                                                }
                                             </div>
                                         }
+                                        <div>-</div>
                                         {
                                             <div>
                                                 {
                                                     formatDateTime(
                                                         selectedCar.createdAt,
                                                     ).time
-                                                }{' '}
+                                                }
                                             </div>
-                                        }{' '}
+                                        }
                                         <br />
                                     </div>
-                                    <div className="flex gap-[20px]">
+                                    <div className="flex gap-[1px]">
                                         {selectedCar.lat}
                                         <div>,</div>
                                         {selectedCar.lng}

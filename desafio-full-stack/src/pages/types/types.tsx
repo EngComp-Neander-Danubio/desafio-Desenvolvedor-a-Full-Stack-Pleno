@@ -68,10 +68,7 @@ export const columns: Array<ColumnProps<DataCars>> = [
                             key={record.id}
                             className="flex items-center justify-center hover:cursor-pointer"
                         >
-                            <PiMapPinLine
-                                size={20}
-                                onClick={() => handleLoadingOneCar(record.id)}
-                            />
+                            <PiMapPinLine size={20} />
                         </div>
                     }
                 </>

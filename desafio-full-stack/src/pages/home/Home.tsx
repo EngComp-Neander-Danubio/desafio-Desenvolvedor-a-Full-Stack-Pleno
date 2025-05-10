@@ -18,6 +18,11 @@ export const Home = () => {
     const [filterWord, setFilterWord] = useState('');
     const [page, setPage] = useState<number>(1);
     const mapRef = useRef<HTMLDivElement>(null);
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(0);
+    const handleRadioChange = (index: number) => {
+        setSelectedIndex(index);
+    };
+
     const handleLoadingCarLocation = (plate: string | number) => {
         const car = carsLocation.filter(item => item.plate === plate);
         if (plate) {
@@ -111,23 +116,16 @@ export const Home = () => {
                     item.plate.toLowerCase().includes(word) ||
                     item.fleet?.toLowerCase().includes(word),
             );
-            //console.log(resultsCarsLocation);
-
             setCarsFiltereds(resultcars);
             setCarsLocationFiltered(resultsCarsLocation);
         }
     }, [filterWord, cars]);
 
-    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-    const handleRadioChange = (index: number) => {
-        setSelectedIndex(index);
-    };
-
     const handleLoadingDatas = async () => {
         try {
             const response = await api.get(`/vehicles/list-with-paginate`, {
                 params: {
-                    type: 'tracked',
+                    type: selectedIndex === 0 ? 'tracked' : '',
                     page: page,
                     perPage: 20,
                 },
@@ -174,7 +172,7 @@ export const Home = () => {
         <>
             <Toaster />
             <div className="flex flex-col gap-1 p-5 justify-center justify-items-center-safe bg-[#001622]">
-                <HeaderMain name="Neander Danubio" />
+                <HeaderMain name={`${process.env.NAME}`} />
                 <NavbarMain
                     name="Lista"
                     handleRadioChange={handleRadioChange}

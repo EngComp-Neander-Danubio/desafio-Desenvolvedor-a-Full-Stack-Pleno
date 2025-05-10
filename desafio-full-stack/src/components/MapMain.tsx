@@ -23,11 +23,8 @@ export const MapMain: React.FC<ICarsProps> = ({ datasCar }) => {
             },
             { lat: 0, lng: 0 },
         );
-
         const avgLat = total.lat / data.length;
         const avgLng = total.lng / data.length;
-        //console.log(avgLat, avgLng);
-
         return [avgLat, avgLng];
     };
     const CarMarkers = React.memo(({ datasCar }: ICarsProps) => (

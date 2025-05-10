@@ -14,6 +14,7 @@ A aplicação tem por propósito exibir a localização de veículos em tempo re
 - 📜 Lista lateral de veículos com navegação integrada ao mapa
 - 📱 Design responsivo para dispositivos móveis
 - 📦 Testes unitários com Vitest + Testing Library
+- 📦 Testes e2e com Playwright
 
 ---
 
@@ -25,15 +26,13 @@ A aplicação tem por propósito exibir a localização de veículos em tempo re
 - **TypeScript**
 - **Tailwind CSS**
 - **@react-google-maps/api**
+- **Prettier**
 - **Vitest** e **React Testing Library** (testes unitários)
+- **Playwright** (testes e2e)
 
-### Back-end (opcional)
+### Back-end
 
-> Este projeto pode ser facilmente integrado com um back-end em:
-
-- **Node.js** + **Express**
-- Banco de dados: **PostgreSQL** ou **MongoDB**
-- Autenticação: **JWT**
+> O backend é fornecido pela equipe de recrutamento:
 
 ---
 
@@ -42,5 +41,5 @@ A aplicação tem por propósito exibir a localização de veículos em tempo re
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repo.git
+git clone https://github.com/EngComp-Neander-Danubio/desafio-Desenvolvedor-a-Full-Stack-Pleno.git
 ```
