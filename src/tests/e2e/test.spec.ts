@@ -6,9 +6,4 @@ t('Loadind of car datas', async ({ page }) => {
     );
     expect(response).toBeDefined();
     expect(response?.status()).toBe(200);
-    //const json = await response?.json();
-    //expect(json).toHaveProperty('cars');
-    //expect(json.cars.length).toBeGreaterThan(0);
-    //onst firstCar = await page.textContent('.id');
-    //expect(firstCar).toContain('Fusca');
 });

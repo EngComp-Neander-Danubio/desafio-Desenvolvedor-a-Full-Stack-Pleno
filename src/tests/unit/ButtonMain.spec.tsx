@@ -10,7 +10,12 @@ describe('ButtonMain', () => {
         expect(screen.getByText('Novo')).toBeInTheDocument();
     });
     it("if I don't to pass the label props, the button should be rendered", () => {
-        render(<ButtonMain onClick={handleClick} />);
+        render(
+            <ButtonMain
+                onClick={handleClick}
+                label={undefined as unknown as string}
+            />,
+        );
         const button = screen.queryByRole('button');
         expect(button).toBeInTheDocument();
         //expect(button).toHaveAttribute('label', undefined)

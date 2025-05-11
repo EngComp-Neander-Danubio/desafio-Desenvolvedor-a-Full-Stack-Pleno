@@ -4,7 +4,7 @@ import { HeaderMain } from '../../components/HeaderMain';
 import '@testing-library/jest-dom/vitest';
 describe('HeaderMain', () => {
     it("If I don't to pass name props", () => {
-        render(<HeaderMain />);
+        render(<HeaderMain name={undefined as unknown as string} />);
         const div = screen.queryByRole('h1', { name: 'h1-header-main' });
         expect(div).toBeNull();
         //expect(div).toBeEmptyDOMElement();

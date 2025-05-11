@@ -46,8 +46,12 @@ const mockData: DataCarsLocation[] = [
     },
 ];
 vi.mock('@react-google-maps/api', () => ({
-    LoadScript: ({ children }) => <>{children}</>,
-    GoogleMap: props => <div data-testid="map-google">{props.children}</div>,
+    LoadScript: ({ children }: { children: React.ReactNode }) => (
+        <>{children}</>
+    ),
+    GoogleMap: (props: { children?: React.ReactNode }) => (
+        <div data-testid="map-google">{props.children}</div>
+    ),
     Marker: () => <div data-testid="map-marker" />,
     useJsApiLoader: () => ({
         isLoaded: true,
@@ -61,7 +65,9 @@ describe('MapGoogle', async () => {
         expect(map).toBeInTheDocument();
     });
     it("if I don't to pass the dataCars props, the map should be rendered", async () => {
-        render(<MapGoogle />);
+        render(
+            <MapGoogle datasCar={undefined as unknown as DataCarsLocation[]} />,
+        );
         const map = screen.queryByTestId('map-google');
         expect(map).toBeInTheDocument();
     });
