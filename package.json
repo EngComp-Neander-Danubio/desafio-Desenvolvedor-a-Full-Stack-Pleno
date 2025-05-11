@@ -12,7 +12,8 @@
         "test:unit": "vitest run",
         "test:e2e": "playwright test",
         "test": "vitest",
-        "format": "prettier --write **/*.{js,jsx,ts,tsx,css,md,json}"
+        "format": "prettier --write **/*.{js,jsx,ts,tsx,css,md,json}",
+        "vercel-build": "npm install --legacy-peer-deps && npm run build"
     },
     "dependencies": {
         "@headlessui/react": "^2.2.2",
