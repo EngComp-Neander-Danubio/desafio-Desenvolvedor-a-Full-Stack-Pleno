@@ -17,7 +17,7 @@ export const NavbarMain: React.FC<Iprops> = ({
     return (
         <nav
             id="nav-navbar"
-            className="bg-primary h-[49px] text-white border-blue-30"
+            className="bg-primary h-auto sm:h-auto md:h-auto sm:flex-col text-white border-blue-30"
         >
             <div className="w-full max-w-[1700px] mx-auto px-4 flex flex-col lg:flex-row justify-between items-center lg:items-center gap-4 lg:gap-0">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 lg:gap-[100px] w-full lg:w-auto">
@@ -34,7 +34,7 @@ export const NavbarMain: React.FC<Iprops> = ({
                         ))}
                     </div>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-center w-full lg:w-auto sm:justify-between">
+                <div className="flex flex-col sm:flex-row gap-4 sm:items-center w-full lg:w-auto sm:justify-between">
                     <InputSearch
                         label=""
                         placeholder="Buscar por placa ou frota"
