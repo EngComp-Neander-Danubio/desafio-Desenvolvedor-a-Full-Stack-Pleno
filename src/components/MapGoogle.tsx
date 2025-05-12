@@ -28,7 +28,7 @@ export const MapGoogle = forwardRef<HTMLDivElement, ICarsProps>(
 
         const { isLoaded } = useJsApiLoader({
             id: 'google-map-script',
-            googleMapsApiKey: `${import.meta.env.API_GOOGLE}`,
+            googleMapsApiKey: `${import.meta.env.VITE_API_GOOGLE}`,
         });
 
         const onLoad = useCallback((mapInstance: google.maps.Map) => {
