@@ -172,7 +172,7 @@ export const Home = () => {
         <>
             <Toaster />
             <div className="flex flex-col gap-1 p-5 justify-center justify-items-center-safe bg-[#001622]">
-                <HeaderMain name={`${import.meta.env.NAME}`} />
+                <HeaderMain name={`${import.meta.env.VITE_NAME}`} />
                 <NavbarMain
                     name="Lista"
                     handleRadioChange={handleRadioChange}
